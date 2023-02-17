@@ -1,5 +1,6 @@
 <?php
 
+// render('articles/shows')
 function render(string $path, array $variables = [])
 {
     extract($variables);
@@ -9,4 +10,11 @@ function render(string $path, array $variables = [])
     $pageContent = ob_get_clean();
 
     require('templates/layout.html.php');
+}
+
+// redirect('index.php')
+function redirect(string $url): void
+{
+    header("Location: index.php");
+    exit();
 }

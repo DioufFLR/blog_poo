@@ -14,6 +14,8 @@
  * Et enfin on pourra rediriger l'utilisateur vers l'article en question
  */
 require_once ('libraries/database.php');
+require_once ('libraries/utils.php');
+
 /**
  * 1. On vérifie que les données ont bien été envoyées en POST
  * D'abord, on récupère les informations à partir du POST
@@ -70,5 +72,4 @@ $query = $pdo->prepare('INSERT INTO comments SET author = :author, content = :co
 $query->execute(compact('author', 'content', 'article_id'));
 
 // 4. Redirection vers l'article en question :
-header('Location: article.php?id=' . $article_id);
-exit();
+redirect("article.php?id=" . $article_id);
