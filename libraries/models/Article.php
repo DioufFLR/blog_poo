@@ -3,6 +3,14 @@
 require_once ('libraries/database.php');
 
 class Article {
+
+    private $pdo;
+
+    public function __construct()
+    {
+        $this->pdo = getPdo();
+    }
+
     /**
      * Retourne la liste des articles classés par date de création
      *
@@ -10,8 +18,7 @@ class Article {
      */
     public function findAll(): array
     {
-        $pdo = getPdo();
-        $resultats = $pdo->query('SELECT * FROM articles ORDER BY created_at DESC');
+        $resultats = $this->pdo->query('SELECT * FROM articles ORDER BY created_at DESC');
         // On fouille le résultat pour en extraire les données réelles
         $articles = $resultats->fetchAll();
         return $articles;
@@ -24,8 +31,7 @@ class Article {
     */
     public function find(int $id)
     {
-        $pdo = getPdo();
-        $query = $pdo->prepare("SELECT * FROM articles WHERE id = :article_id");
+        $query = $this->pdo->prepare("SELECT * FROM articles WHERE id = :article_id");
         $query->execute(['article_id' => $id]);
         $article = $query->fetch();
         return $article;
@@ -39,8 +45,7 @@ class Article {
     */
     public function delete(int $id) : void
     {
-        $pdo = getPdo();
-        $query = $pdo->prepare('DELETE FROM articles WHERE id = :id');
+        $query = $this->pdo->prepare('DELETE FROM articles WHERE id = :id');
         $query->execute(['id' => $id]);
     }
 }
