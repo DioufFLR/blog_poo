@@ -37,4 +37,4 @@ $model->delete($id);
 /**
  * 5. Redirection vers la page d'accueil
  */
-redirect("article.php");
+redirect("index.php");

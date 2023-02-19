@@ -8,6 +8,9 @@
  */
 require_once ('libraries/database.php');
 require_once ('libraries/utils.php');
+require_once ('libraries/models/Comment.php');
+
+$model = new Comment();
 
 /**
  * 1. Récupération du paramètre "id" en GET
@@ -18,21 +21,10 @@ if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
 
 $id = $_GET['id'];
 
-
-/**
- * 2. Connexion à la base de données avec PDO
- * Attention, on précise ici deux options :
- * - Le mode d'erreur : le mode exception permet à PDO de nous prévenir violament quand on fait une connerie ;-)
- * - Le mode d'exploitation : FETCH_ASSOC veut dire qu'on exploitera les données sous la forme de tableaux associatifs
- * 
- * PS : Vous remarquez que ce sont les mêmes lignes que pour l'index.php ?!
- */
-$pdo = getPdo();
-
 /**
  * 3. Vérification de l'existence du commentaire
  */
-$commentaire = findComment($id);
+$commentaire = $model->find($id);
 if (!$commentaire) {
     die("Aucun commentaire n'a l'identifiant $id !");
 }
@@ -42,7 +34,7 @@ if (!$commentaire) {
  * On récupère l'identifiant de l'article avant de supprimer le commentaire
  */
 $article_id = $commentaire['article_id'];
-deleteComment($id);
+$model->delete($id);
 
 /**
  * 5. Redirection vers l'article en question
