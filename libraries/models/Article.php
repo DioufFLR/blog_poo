@@ -2,8 +2,8 @@
 
 require_once ('libraries/database.php');
 
-class Article {
-
+class Article
+{
     private $pdo;
 
     public function __construct()
