@@ -15,7 +15,7 @@ $model = new Article();
 /**
  * 2. Récupération des articles
  */
-$articles = $model->findAllArticles();
+$articles = $model->findAll();
 
 /**
  * 3. Affichage

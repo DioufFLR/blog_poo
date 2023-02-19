@@ -12,6 +12,11 @@
  */
 require_once ('libraries/database.php');
 require_once ('libraries/utils.php');
+require_once ('libraries/models/Article.php');
+require_once ('libraries/models/Comment.php');
+
+$articleModel = new Article();
+$commentModel = new Comment();
 
 /**
  * 1. Récupération du param "id" et vérification de celui-ci
@@ -19,7 +24,7 @@ require_once ('libraries/utils.php');
 // On part du principe qu'on ne possède pas de param "id"
 $article_id = null;
 
-// Mais si il y'en a un et que c'est un nombre entier, alors c'est cool
+// Mais s'il y en a un et que c'est un nombre entier, alors c'est cool
 if (!empty($_GET['id']) && ctype_digit($_GET['id'])) {
     $article_id = $_GET['id'];
 }
@@ -34,13 +39,13 @@ if (!$article_id) {
  * On va ici utiliser une requête préparée car elle inclue une variable qui provient de l'utilisateur : Ne faites
  * jamais confiance à ce connard d'utilisateur ! :D
  */
-$article = findArticle($article_id);
+$article = $articleModel->find($article_id);
 
 /**
  * 4. Récupération des commentaires de l'article en question
  * Pareil, toujours une requête préparée pour sécuriser la donnée filée par l'utilisateur (cet enfoiré en puissance !)
  */
-$commentaires = findAllComments($article_id);
+$commentaires = $commentModel->findAllWithArticle($article_id);
 
 /**
  * 5. On affiche 

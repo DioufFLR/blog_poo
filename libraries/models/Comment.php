@@ -10,7 +10,7 @@ class Comment
      * @param integer $article_id
      * @return array
      */
-    public function findAllComments(int $article_id): array
+    public function findAllWithArticle(int $article_id): array
     {
         $pdo = getPdo();
         $query = $pdo->prepare("SELECT * FROM comments WHERE article_id = :article_id");
@@ -25,7 +25,7 @@ class Comment
      * @param integer $id
      * @return array|bool le commentaire si on le trouve, false si on ne le trouve pas
      */
-    public function findComment(int $id)
+    public function find(int $id)
     {
         $pdo = getPdo();
         $query = $pdo->prepare('SELECT * FROM comments WHERE id = :id');
@@ -40,7 +40,7 @@ class Comment
      * @param integer $id
      * @return void
      */
-    public function deleteComment(int $id) : void
+    public function delete(int $id) : void
     {
         $pdo = getPdo();
         $query = $pdo->prepare('DELETE FROM comments WHERE id = :id');
@@ -55,7 +55,7 @@ class Comment
      * @param integer $article_id
      * @return void
      */
-    public function insertComment(string $author, string $content, int $article_id) : void
+    public function insert(string $author, string $content, int $article_id) : void
     {
         $pdo = getPdo();
         $query = $pdo->prepare('INSERT INTO comments SET author = :author, content = :content, article_id = :article_id, created_at = NOW()');

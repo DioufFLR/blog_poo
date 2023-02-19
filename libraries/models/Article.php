@@ -8,7 +8,7 @@ class Article {
      *
      * @return array
      */
-    public function findAllArticles(): array
+    public function findAll(): array
     {
         $pdo = getPdo();
         $resultats = $pdo->query('SELECT * FROM articles ORDER BY created_at DESC');
@@ -20,10 +20,9 @@ class Article {
     /**
     * Retourne un article grâce à son identifiant
     *
-    * @param integer $id
-    * @return void
+    * @param integer $id    *
     */
-    public function findArticle(int $id)
+    public function find(int $id)
     {
         $pdo = getPdo();
         $query = $pdo->prepare("SELECT * FROM articles WHERE id = :article_id");
@@ -38,7 +37,7 @@ class Article {
     * @param integer $id
     * @return void
     */
-    public function deleteArticle(int $id) : void
+    public function delete(int $id) : void
     {
         $pdo = getPdo();
         $query = $pdo->prepare('DELETE FROM articles WHERE id = :id');
