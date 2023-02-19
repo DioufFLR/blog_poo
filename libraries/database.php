@@ -66,6 +66,14 @@ function deleteComment(int $id) : void
     $query->execute(['id' => $id]);
 }
 
+/*
+ * Insère un commentaire dans la base de données
+ *
+ * @param string $author
+ * @param string $content
+ * @param integer $article_id
+ * @return void
+ */
 function insertComment(string $author, string $content, int $article_id) : void
 {
     $pdo = getPdo();
