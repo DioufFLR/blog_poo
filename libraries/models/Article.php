@@ -1,16 +1,9 @@
 <?php
 
-require_once ('libraries/database.php');
+require_once ('libraries/models/Model.php');
 
-class Article
+class Article extends Model
 {
-    private $pdo;
-
-    public function __construct()
-    {
-        $this->pdo = getPdo();
-    }
-
     /**
      * Retourne la liste des articles classés par date de création
      *
