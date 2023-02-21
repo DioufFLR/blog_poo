@@ -15,5 +15,6 @@
  */
 
 require_once ('libraries/autoload.php');
+
 $controller = new \Controllers\Comment();
-$controller->inset();
+$controller->insert();
