@@ -5,8 +5,7 @@
  */
 spl_autoload_register(function ($className) {
     $className = str_replace("\\", '/', $className);
-    $className = lcfirst($className); // Pour linux
-    var_dump($className);
+//    $className = lcfirst($className); // Problème sur système linux pourquoi ? Sûrement dû à un composant dans php.ini
     require_once("libraries/$className.php");
 
 });
